@@ -27,6 +27,7 @@
         <url/>
     </scm>
     <properties>
+         <start-class>com.may.Application</start-class>
         <maven.checkstyle.plugin.configLocation>checkstyle.xml</maven.checkstyle.plugin.configLocation>
         <java.version>17</java.version>
     </properties>
