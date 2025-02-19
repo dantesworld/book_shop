@@ -1,0 +1,7 @@
+mate\academy\bookapp\exceptions\DataProcessingException.class
+mate\academy\bookapp\repository\BookRepositoryImpl.class
+mate\academy\bookapp\model\Book.class
+mate\academy\bookapp\BookAppApplication.class
+mate\academy\bookapp\service\BookService.class
+mate\academy\bookapp\repository\BookRepository.class
+mate\academy\bookapp\service\BookServiceImpl.class
