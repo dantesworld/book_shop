@@ -7,17 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "books")
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
-@ToString(includeFieldNames = true)
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
