@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IsbnSpecificationProvider implements SpecificationProvider<Book> {
-    private static final String KEY = "isbn";
+    private static final String ISBN_KEY = "isbn";
 
     @Override
     public String getKey() {
-        return KEY;
+        return ISBN_KEY;
     }
 
     public Specification<Book> getSpecification(String[] params) {
         return (root, query, criteriaBuilder)
-                -> root.get(KEY).in(Arrays.stream(params).toArray());
+                -> root.get(ISBN_KEY).in(Arrays.stream(params).toArray());
     }
 }
