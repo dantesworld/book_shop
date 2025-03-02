@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
-    private static final String ISBN_KEY = "isbn";
-    private static final String TITLE_KEY = "title";
-    private static final String AUTHOR_KEY = "author";
+    public static final String ISBN_KEY = "isbn";
+    public static final String TITLE_KEY = "title";
+    public static final String AUTHOR_KEY = "author";
 
     private final SpecificationProviderManager<Book> bookSpecificationProviderManager;
 
