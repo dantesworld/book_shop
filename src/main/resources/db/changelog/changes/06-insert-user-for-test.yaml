@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-users-for-test
+      author: Parakhin Nikita
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: email, value: "user1234@example.com" }
+              - column: { name: password, value: "$2a$10$.tc/w4TOXUJS9OZLyGhp/eRDuCnlBCuVuhE0FW4MaET2CHpyQHJ9a" }
+              - column: { name: first_name, value: "User123" }
+              - column: { name: last_name, value: "User123" }
+              - column: { name: shipping_address, value: "user shipping address" }
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: email, value: "admin@example.com" }
+              - column: { name: password, value: "$2a$10$YZsK/OEKM4bcaCFJ2W1enO23NXRln27c66V5RhiJMxY9LKsMyONny" }
+              - column: { name: first_name, value: "Admin" }
+              - column: { name: last_name, value: "Admin" }
+              - column: { name: shipping_address, value: "admin shipping address" }
