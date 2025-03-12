@@ -4,9 +4,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mate.academy.bookapp.dto.UserRegistrationRequestDto;
-import mate.academy.bookapp.dto.UserResponseDto;
+import mate.academy.bookapp.dto.user.UserLoginRequestDto;
+import mate.academy.bookapp.dto.user.UserLoginResponseDto;
+import mate.academy.bookapp.dto.user.UserRegistrationRequestDto;
+import mate.academy.bookapp.dto.user.UserResponseDto;
 import mate.academy.bookapp.exceptions.RegistrationException;
+import mate.academy.bookapp.security.AuthenticationService;
 import mate.academy.bookapp.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthenticationController {
     private final UserService userService;
+    private final AuthenticationService authenticationService;
+
+    @Operation(summary = "Login user", description = "Endpoint for login existing user")
+    @PostMapping("/login")
+    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto requestDto) {
+        return authenticationService.authenticate(requestDto);
+    }
 
     @Operation(summary = "New user register", description = "Endpoint for user registration")
     @PostMapping("/registration")

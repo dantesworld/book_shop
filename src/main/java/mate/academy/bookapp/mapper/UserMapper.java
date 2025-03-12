@@ -1,8 +1,8 @@
 package mate.academy.bookapp.mapper;
 
 import mate.academy.bookapp.config.MapperConfig;
-import mate.academy.bookapp.dto.UserRegistrationRequestDto;
-import mate.academy.bookapp.dto.UserResponseDto;
+import mate.academy.bookapp.dto.user.UserRegistrationRequestDto;
+import mate.academy.bookapp.dto.user.UserResponseDto;
 import mate.academy.bookapp.model.User;
 import org.mapstruct.Mapper;
 
