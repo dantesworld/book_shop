@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.bookapp.dto.cartitem.CartItemRequestDto;
 import mate.academy.bookapp.dto.cartitem.UpdateCartItemRequestDto;
 import mate.academy.bookapp.dto.shoppingcart.ShoppingCartDto;
+import mate.academy.bookapp.model.User;
 import mate.academy.bookapp.service.shoppingcart.ShoppingCartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,8 +32,9 @@ public class ShoppingCartController {
     @GetMapping
     @Operation(summary = "Get the shopping cart", description = "Get the shopping cart by id")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ShoppingCartDto find(Authentication authentication) {
-        return shoppingCartService.find(authentication);
+    public ShoppingCartDto getShoppingCartByUser(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return shoppingCartService.getShoppingCartByUserId(user.getId());
     }
 
     @PostMapping
@@ -40,7 +42,8 @@ public class ShoppingCartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ShoppingCartDto save(@RequestBody @Valid CartItemRequestDto requestDto,
                                 Authentication authentication) {
-        return shoppingCartService.addCartItem(requestDto, authentication);
+        User user = (User) authentication.getPrincipal();
+        return shoppingCartService.addCartItem(requestDto, user.getId());
     }
 
     @PutMapping("/items/{id}")
@@ -49,14 +52,16 @@ public class ShoppingCartController {
     public ShoppingCartDto update(@PathVariable Long id,
                                   @RequestBody @Valid UpdateCartItemRequestDto updateDto,
                                   Authentication authentication) {
-        return shoppingCartService.updateCartItemById(id, updateDto.getQuantity(), authentication);
+        User user = (User) authentication.getPrincipal();
+        return shoppingCartService.updateCartItemById(updateDto, id, user.getId());
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/items/{id}")
     @Operation(summary = "Delete the cart item", description = "Delete the cart item by id")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public void delete(@PathVariable Long id) {
-        shoppingCartService.deleteCartItemById(id);
+    public void delete(@PathVariable Long id, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        shoppingCartService.deleteCartItemById(id, user.getId());
     }
 }
