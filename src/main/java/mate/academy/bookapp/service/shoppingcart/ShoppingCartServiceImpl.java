@@ -1,12 +1,12 @@
 package mate.academy.bookapp.service.shoppingcart;
 
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookapp.dto.cartitem.CartItemRequestDto;
 import mate.academy.bookapp.dto.cartitem.UpdateCartItemRequestDto;
 import mate.academy.bookapp.dto.shoppingcart.ShoppingCartDto;
-import mate.academy.bookapp.exceptions.DataProcessingException;
 import mate.academy.bookapp.exceptions.EntityNotFoundException;
 import mate.academy.bookapp.mapper.CartItemMapper;
 import mate.academy.bookapp.mapper.ShoppingCartMapper;
@@ -38,12 +38,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         ShoppingCart shoppingCart = findShoppingCartByUserId(userId);
 
-        checkBookInShoppingCart(shoppingCart.getCartItems(), book.getId());
+        checkBookInShoppingCart(shoppingCart.getCartItems(), book.getId(),
+                requestDto.getQuantity());
 
-        CartItem cartItem = cartItemMapper.toModel(requestDto);
-        cartItem.setShoppingCart(shoppingCart);
-        cartItem.setBook(book);
-        shoppingCart.getCartItems().add(cartItem);
+        if (shoppingCart.getCartItems().stream()
+                .noneMatch(cartItem -> cartItem.getBook().getId().equals(book.getId()))) {
+            CartItem cartItem = cartItemMapper.toModel(requestDto);
+            cartItem.setShoppingCart(shoppingCart);
+            cartItem.setBook(book);
+            shoppingCart.getCartItems().add(cartItem);
+        }
 
         shoppingCartRepository.save(shoppingCart);
 
@@ -99,13 +103,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 );
     }
 
-    private void checkBookInShoppingCart(Set<CartItem> cartItems, Long bookId) {
-        boolean bookExists = cartItems.stream()
-                .anyMatch(cartItem -> cartItem.getBook().getId().equals(bookId));
+    private void checkBookInShoppingCart(Set<CartItem> cartItems, Long bookId, int quantityToAdd) {
+        Optional<CartItem> existingCartItem = cartItems.stream()
+                .filter(cartItem -> cartItem.getBook().getId().equals(bookId))
+                .findFirst();
 
-        if (bookExists) {
-            throw new DataProcessingException(
-                    "Book with id: " + bookId + " is already in the shopping cart!");
+        if (existingCartItem.isPresent()) {
+
+            CartItem cartItem = existingCartItem.get();
+            cartItem.setQuantity(cartItem.getQuantity() + quantityToAdd);
         }
     }
 }
