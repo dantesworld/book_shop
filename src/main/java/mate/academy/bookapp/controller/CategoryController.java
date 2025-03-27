@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.bookapp.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.bookapp.dto.category.CategoryDto;
 import mate.academy.bookapp.dto.category.CategoryRequestDto;
-import mate.academy.bookapp.service.BookService;
-import mate.academy.bookapp.service.CategoryService;
+import mate.academy.bookapp.service.book.BookService;
+import mate.academy.bookapp.service.category.CategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -39,7 +39,7 @@ public class CategoryController {
         return categoryService.findAll(pageable);
     }
 
-    @Operation(summary = "Get category by id", description = "Get catehory by id")
+    @Operation(summary = "Get category by id", description = "Get category by id")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{id}")
     public CategoryDto getCategoryById(@PathVariable Long id) {

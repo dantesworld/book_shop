@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.bookapp.dto.book.BookDto;
 import mate.academy.bookapp.dto.book.BookSearchParametersDto;
 import mate.academy.bookapp.dto.book.CreateBookRequestDto;
-import mate.academy.bookapp.service.BookService;
+import mate.academy.bookapp.service.book.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package mate.academy.bookapp.service;
+package mate.academy.bookapp.service.category;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.bookapp.dto.category.CategoryDto;

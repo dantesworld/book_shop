@@ -1,4 +1,4 @@
-package mate.academy.bookapp.repository;
+package mate.academy.bookapp.repository.role;
 
 import mate.academy.bookapp.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
