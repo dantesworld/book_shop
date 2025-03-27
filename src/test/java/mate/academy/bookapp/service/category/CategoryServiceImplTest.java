@@ -1,4 +1,4 @@
-package mate.academy.bookapp.service;
+package mate.academy.bookapp.service.category;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -12,7 +12,6 @@ import mate.academy.bookapp.exceptions.EntityNotFoundException;
 import mate.academy.bookapp.mapper.CategoryMapper;
 import mate.academy.bookapp.model.Category;
 import mate.academy.bookapp.repository.category.CategoryRepository;
-import mate.academy.bookapp.service.category.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

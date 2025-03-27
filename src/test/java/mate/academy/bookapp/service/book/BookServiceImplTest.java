@@ -1,4 +1,4 @@
-package mate.academy.bookapp.service;
+package mate.academy.bookapp.service.book;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -21,7 +21,6 @@ import mate.academy.bookapp.model.Category;
 import mate.academy.bookapp.repository.book.BookRepository;
 import mate.academy.bookapp.repository.book.BookSpecificationBuilder;
 import mate.academy.bookapp.repository.category.CategoryRepository;
-import mate.academy.bookapp.service.book.BookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
