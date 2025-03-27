@@ -1,4 +1,4 @@
-package mate.academy.bookapp.service;
+package mate.academy.bookapp.service.user;
 
 import jakarta.transaction.Transactional;
 import java.util.Set;
@@ -9,8 +9,9 @@ import mate.academy.bookapp.exceptions.RegistrationException;
 import mate.academy.bookapp.mapper.UserMapper;
 import mate.academy.bookapp.model.Role;
 import mate.academy.bookapp.model.User;
-import mate.academy.bookapp.repository.RoleRepository;
-import mate.academy.bookapp.repository.UserRepository;
+import mate.academy.bookapp.repository.role.RoleRepository;
+import mate.academy.bookapp.repository.user.UserRepository;
+import mate.academy.bookapp.service.shoppingcart.ShoppingCartService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+    private final ShoppingCartService shoppingCartService;
 
     @Override
     public UserResponseDto register(UserRegistrationRequestDto requestDto)
@@ -33,6 +35,8 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toModel(requestDto);
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
         user.setRoles(Set.of(roleRepository.findRoleByName(Role.RoleName.ROLE_USER)));
-        return userMapper.toDto(userRepository.save(user));
+        userRepository.save(user);
+        shoppingCartService.createDefaultShoppingCart(user);
+        return userMapper.toDto(user);
     }
 }

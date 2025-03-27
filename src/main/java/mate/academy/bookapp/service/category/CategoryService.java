@@ -1,4 +1,4 @@
-package mate.academy.bookapp.service;
+package mate.academy.bookapp.service.category;
 
 import mate.academy.bookapp.dto.category.CategoryDto;
 import mate.academy.bookapp.dto.category.CategoryRequestDto;
