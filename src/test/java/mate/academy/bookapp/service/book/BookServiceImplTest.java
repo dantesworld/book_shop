@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import mate.academy.bookapp.dto.book.BookDto;
 import mate.academy.bookapp.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.bookapp.dto.book.BookSearchParametersDto;

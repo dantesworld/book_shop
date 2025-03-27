@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.Optional;
+
 import mate.academy.bookapp.dto.category.CategoryDto;
 import mate.academy.bookapp.dto.category.CategoryRequestDto;
 import mate.academy.bookapp.exceptions.EntityNotFoundException;
